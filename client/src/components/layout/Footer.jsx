@@ -45,7 +45,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-gray-800 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm">
-          <p>© {new Date().getFullYear()} RecipeIQ. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} RecipeIQ. Developed by Ganesh kumar, Rama krishna Sanath, Tharun venkat, Premasree.</p>
           <p className="text-gray-600">Cook Smarter with AI</p>
         </div>
       </div>
