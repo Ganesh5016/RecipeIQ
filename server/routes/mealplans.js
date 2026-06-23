@@ -1,0 +1,11 @@
+import express from 'express';
+import { getMealPlans, getMealPlanById, createMealPlan, updateMealPlan, deleteMealPlan } from '../controllers/mealplanController.js';
+import { authenticate } from '../middleware/auth.js';
+const router = express.Router();
+router.use(authenticate);
+router.get('/', getMealPlans);
+router.post('/', createMealPlan);
+router.get('/:id', getMealPlanById);
+router.put('/:id', updateMealPlan);
+router.delete('/:id', deleteMealPlan);
+export default router;

@@ -1,0 +1,11 @@
+import express from 'express';
+import { getRecipes, getRecipeById, getTrendingRecipes, getMealDBRecipes, getMealDBCategories, createRecipe } from '../controllers/recipeController.js';
+import { authenticate } from '../middleware/auth.js';
+const router = express.Router();
+router.get('/', getRecipes);
+router.get('/trending', getTrendingRecipes);
+router.get('/mealdb', getMealDBRecipes);
+router.get('/mealdb/categories', getMealDBCategories);
+router.get('/:id', authenticate, getRecipeById);
+router.post('/', authenticate, createRecipe);
+export default router;

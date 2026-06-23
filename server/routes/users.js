@@ -1,0 +1,10 @@
+import express from 'express';
+import { getProfile, updateProfile, deleteAccount } from '../controllers/userController.js';
+import { authenticate } from '../middleware/auth.js';
+import { validate, schemas } from '../middleware/validation.js';
+const router = express.Router();
+router.use(authenticate);
+router.get('/profile', getProfile);
+router.put('/profile', validate(schemas.updateProfile), updateProfile);
+router.delete('/account', deleteAccount);
+export default router;

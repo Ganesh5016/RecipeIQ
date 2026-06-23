@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --border: rgb(229, 231, 235);
+}
+.dark {
+  --border: rgb(31, 41, 55);
+}
+
+@layer base {
+  * { border-color: var(--border); }
+  body {
+    @apply bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 font-sans antialiased;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { @apply bg-gray-100 dark:bg-gray-800; }
+  ::-webkit-scrollbar-thumb { @apply bg-primary-400 rounded-full; }
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl border border-white/20 dark:border-gray-700/50;
+  }
+  .glass-card {
+    @apply glass rounded-2xl shadow-xl;
+  }
+  .btn-primary {
+    @apply bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200 shadow-lg shadow-primary-500/25 hover:shadow-primary-500/40 hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0;
+  }
+  .btn-secondary {
+    @apply bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 font-semibold px-6 py-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0;
+  }
+  .btn-ghost {
+    @apply text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 font-medium px-4 py-2 rounded-lg hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-all duration-200;
+  }
+  .input-field {
+    @apply w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200;
+  }
+  .card {
+    @apply bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-md transition-shadow duration-200;
+  }
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary-500 to-accent-500 bg-clip-text text-transparent;
+  }
+  .skeleton {
+    @apply animate-pulse bg-gray-200 dark:bg-gray-700 rounded;
+  }
+  .tag {
+    @apply inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium;
+  }
+}
+
+.hero-gradient {
+  background: radial-gradient(ellipse at top left, rgba(249,115,22,0.15) 0%, transparent 50%),
+              radial-gradient(ellipse at bottom right, rgba(217,70,239,0.1) 0%, transparent 50%);
+}
+
+.dark .hero-gradient {
+  background: radial-gradient(ellipse at top left, rgba(249,115,22,0.1) 0%, transparent 50%),
+              radial-gradient(ellipse at bottom right, rgba(217,70,239,0.08) 0%, transparent 50%);
+}

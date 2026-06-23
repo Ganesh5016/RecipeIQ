@@ -1,0 +1,12 @@
+import express from 'express';
+import { getGroceryLists, getGroceryListById, createGroceryList, updateGroceryList, toggleItem, deleteGroceryList } from '../controllers/groceryController.js';
+import { authenticate } from '../middleware/auth.js';
+const router = express.Router();
+router.use(authenticate);
+router.get('/', getGroceryLists);
+router.post('/', createGroceryList);
+router.get('/:id', getGroceryListById);
+router.put('/:id', updateGroceryList);
+router.patch('/:id/items/:itemId/toggle', toggleItem);
+router.delete('/:id', deleteGroceryList);
+export default router;

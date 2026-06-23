@@ -1,0 +1,11 @@
+import express from 'express';
+import { sendMessage, getChatHistory, getSessions, deleteSession } from '../controllers/chatController.js';
+import { authenticate } from '../middleware/auth.js';
+import { validate, schemas } from '../middleware/validation.js';
+const router = express.Router();
+router.use(authenticate);
+router.post('/message', validate(schemas.chatMessage), sendMessage);
+router.get('/sessions', getSessions);
+router.get('/:sessionId', getChatHistory);
+router.delete('/:sessionId', deleteSession);
+export default router;

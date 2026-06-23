@@ -1,0 +1,13 @@
+import express from 'express';
+import { getAllUsers, updateUserRole, deleteUser, getAllRecipes, deleteRecipe, getAllReviews, deleteReview } from '../controllers/adminController.js';
+import { authenticate, requireAdmin } from '../middleware/auth.js';
+const router = express.Router();
+router.use(authenticate, requireAdmin);
+router.get('/users', getAllUsers);
+router.put('/users/:id/role', updateUserRole);
+router.delete('/users/:id', deleteUser);
+router.get('/recipes', getAllRecipes);
+router.delete('/recipes/:id', deleteRecipe);
+router.get('/reviews', getAllReviews);
+router.delete('/reviews/:id', deleteReview);
+export default router;

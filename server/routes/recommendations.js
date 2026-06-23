@@ -1,0 +1,12 @@
+import express from 'express';
+import { generateRecipe, matchIngredients, analyzeNutrition, getHistory, generateMealPlanAI } from '../controllers/recommendationController.js';
+import { authenticate } from '../middleware/auth.js';
+import { validate, schemas } from '../middleware/validation.js';
+const router = express.Router();
+router.use(authenticate);
+router.post('/generate', validate(schemas.generateRecipe), generateRecipe);
+router.post('/match-ingredients', matchIngredients);
+router.post('/analyze-nutrition', analyzeNutrition);
+router.post('/meal-plan-ai', generateMealPlanAI);
+router.get('/history', getHistory);
+export default router;

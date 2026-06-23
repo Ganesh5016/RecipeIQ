@@ -1,0 +1,10 @@
+import express from 'express';
+import { getReviews, addReview, updateReview, deleteReview } from '../controllers/reviewController.js';
+import { authenticate } from '../middleware/auth.js';
+import { validate, schemas } from '../middleware/validation.js';
+const router = express.Router();
+router.get('/:recipeId', getReviews);
+router.post('/:recipeId', authenticate, validate(schemas.review), addReview);
+router.put('/:id', authenticate, validate(schemas.review), updateReview);
+router.delete('/:id', authenticate, deleteReview);
+export default router;
