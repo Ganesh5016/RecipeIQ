@@ -30,6 +30,7 @@ export const schemas = {
     calories: Joi.number().min(100).max(5000),
     skillLevel: Joi.string().valid('beginner','intermediate','advanced'),
     servings: Joi.number().min(1).max(20),
+    language: Joi.string().valid('en', 'hi', 'te', 'ta').allow(''),
   }),
 
   review: Joi.object({
