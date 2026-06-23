@@ -1,13 +1,19 @@
 import mongoose from 'mongoose';
 
+let isConnected = false;
+
 export const connectDB = async () => {
+  if (isConnected && mongoose.connection.readyState === 1) return;
   try {
-    const conn = await mongoose.connect(process.env.MONGODB_URI, {
-      serverSelectionTimeoutMS: 5000,
+    await mongoose.connect(process.env.MONGODB_URI, {
+      serverSelectionTimeoutMS: 10000,
+      socketTimeoutMS: 45000,
     });
-    console.log(`MongoDB connected: ${conn.connection.host}`);
+    isConnected = true;
+    console.log(`MongoDB connected: ${mongoose.connection.host}`);
   } catch (error) {
     console.error('MongoDB connection error:', error.message);
-    process.exit(1);
+    // Don't call process.exit() — it kills Vercel serverless functions
+    throw error;
   }
 };

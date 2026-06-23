@@ -23,8 +23,8 @@ import healthRoutes from './routes/healthRoutes.js';
 import { errorHandler } from './middleware/errorHandler.js';
 
 dotenv.config();
-connectDB();
 
+// Connect DB as middleware (safe for Vercel serverless)
 const app = express();
 
 app.use(helmet());
@@ -71,6 +71,16 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.get('/health', (req, res) => res.json({ status: 'ok', timestamp: new Date() }));
+
+// Connect to DB before handling any API request
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (err) {
+    res.status(503).json({ error: 'Database unavailable' });
+  }
+});
 
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
